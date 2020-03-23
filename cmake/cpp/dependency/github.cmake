@@ -48,8 +48,9 @@ cpp_class(GitHubDependency Dependency)
 
         # It's possible GitHub URLs link to an "asset" (i.e., a tarball)
         string(FIND "${_bd_url}" ".tgz" _bd_is_tarball)
+        string(FIND "${_bd_url}" ".zip" _bd_is_zip)
 
-        if("${_bd_is_tarball}" STREQUAL "-1")
+        if("${_bd_is_tarball}" STREQUAL "-1" AND "${_bd_is_zip}" STREQUAL "-1" )
             cpp_fetch_and_available(
                 "${_bd_name}"
                 GIT_REPOSITORY "${_bd_url}"
